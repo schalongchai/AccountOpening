@@ -10,9 +10,8 @@
 	</parent>
 	<groupId>com.me</groupId>
 	<artifactId>AccountOpenRestAPI</artifactId>
-	<version>SP</version>
-	<name>TestApp</name>
-	<description>Test for Spring Boot</description>
+	<version>1.0.0</version>
+	<name>AccountOpening</name>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -106,13 +105,17 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
 		</plugins>
+		
 	</build>
 
 	<packaging>war</packaging>
+	<description>Account Opening project with Spring boot</description>
 </project>
