@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.me.app.model.Customer;
 import com.me.app.repository.CustomerRepository;
+import com.me.app.repository.CustomerRepository2;
 
 @Service
 public class CustomerService {
@@ -32,6 +33,12 @@ public class CustomerService {
 		if(!custRepo.existsById(c.getId())){
 			custRepo.save(c);
 		}
+	}
+	
+	public List<Customer> getByName(String chars) {
+		CustomerRepository2 custRepo = new CustomerRepository2();
+		List<Customer> customers = custRepo.searchByName(chars);
+		return customers;
 	}
 
 

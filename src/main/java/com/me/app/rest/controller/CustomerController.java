@@ -26,10 +26,11 @@ public class CustomerController {
 		return customerService.getAll();
 	}
 
-	@RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
-    public Customer getCustomerByID(@PathVariable("id") Long id) {
-        return customerService.getById(id);
-    }
+	/*
+	 * @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET) public
+	 * Customer getCustomerByID(@PathVariable("id") Long id) { return
+	 * customerService.getById(id); }
+	 */
 
 	@RequestMapping(value = "/customer/{id}", method = RequestMethod.DELETE)
     public void deleteCustomerByID(@PathVariable("id") Long id) {
@@ -40,6 +41,11 @@ public class CustomerController {
     public void addCustomer(@RequestBody Customer c) {
 		customerService.Add(c);
     }
+	
+	@RequestMapping(value = "/customer/{name}", method = RequestMethod.GET)
+	public List<Customer> getCustByName(@PathVariable("name") String name) {
+		return customerService.getByName(name);
+	}
 
 }
 

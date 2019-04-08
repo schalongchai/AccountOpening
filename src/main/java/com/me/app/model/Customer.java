@@ -1,41 +1,42 @@
 package com.me.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.io.Serializable;
+import javax.persistence.*;
 
+
+/**
+ * The persistent class for the CUSTOMER database table.
+ * 
+ */
 @Entity
-public class Customer {
+@NamedQuery(name="Customer.findAll", query="SELECT c FROM Customer c")
+public class Customer implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+	@SequenceGenerator(name="CUSTOMER_ID_GENERATOR" )
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CUSTOMER_ID_GENERATOR")
+	private long id;
 
+	private String name;
 
-    public Long getId() {
-		return id;
+	public Customer() {
 	}
 
-	public void setId(Long id) {
+	public long getId() {
+		return this.id;
+	}
+
+	public void setId(long id) {
 		this.id = id;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	protected Customer() {}
-
-    public Customer(Long id, String firstName) {
-    	this.id = id;
-        this.name = firstName;
-    }
-
-
-
 
 }
