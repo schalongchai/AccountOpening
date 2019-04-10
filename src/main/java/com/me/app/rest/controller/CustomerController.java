@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.me.app.model.Customer;
+import com.me.app.model.AoCustomerInfo;
 import com.me.app.service.CustomerService;
 
 @RestController
@@ -23,7 +23,7 @@ public class CustomerController {
 	CustomerService customerService;
 
 	@RequestMapping(value = "/customers/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public void addCustomer(@RequestBody Customer c) {
+	public void addCustomer(@RequestBody AoCustomerInfo c) {
 		customerService.Add(c);
 	}
 
@@ -34,19 +34,23 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/customers/", method = RequestMethod.GET)
-	public List<Customer> getAll() {
+	public List<AoCustomerInfo> getAll() {
 		return customerService.getAll();
 	}
 
 	@RequestMapping(value = "/customers/{cifno}", method = RequestMethod.GET)
-	public Customer getByID(@PathVariable("cifno") Long id) {
-		return customerService.getById(id);
+	public ResponseEntity<AoCustomerInfo> getByID(@PathVariable("cifno") Long id) {
+		AoCustomerInfo c = customerService.getById(id);
+		if (c==null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(c);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(c);
 	}
 
 	@RequestMapping(value = "/customers", method = RequestMethod.GET)
-	public ResponseEntity<List<Customer>> getBySearch(@RequestParam(value = "fname") String fname,
+	public ResponseEntity<List<AoCustomerInfo>> getBySearch(@RequestParam(value = "fname") String fname,
 			@RequestParam(value = "lname") String lname) {
-		List<Customer> c = customerService.getByName(fname);
+		List<AoCustomerInfo> c = customerService.getByName(fname);
 		if (c.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(c);
 		}
@@ -54,7 +58,7 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/customers/", method = RequestMethod.PUT)
-	public void updateByID(@RequestBody Customer c) {
+	public void updateByID(@RequestBody AoCustomerInfo c) {
 		customerService.Update(c);
 	}
 

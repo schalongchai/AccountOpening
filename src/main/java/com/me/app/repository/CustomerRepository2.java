@@ -11,7 +11,8 @@ import java.util.List;
 
 
 import com.me.app.model.Customer;
-
+//This just a sample when doing every thing by your self, Not used any more...
+//
 public class CustomerRepository2{
 	// JDBC driver name and database URL
 	   	static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";  

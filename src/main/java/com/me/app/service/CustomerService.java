@@ -6,53 +6,42 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.me.app.model.Customer;
-import com.me.app.repository.CustomerRepository;
-import com.me.app.repository.CustomerRepository2;
+import com.me.app.model.AoCustomerInfo;
+import com.me.app.repository.AoCustomerRepository;
 
 @Service
 public class CustomerService {
 	@Autowired
-	private CustomerRepository custRepo;
+	private AoCustomerRepository custRepo;
 
-	public List<Customer> getAll() {
-		List<Customer> customers = (List<Customer>) custRepo.findAll();
-		return customers;
+	public List<AoCustomerInfo> getAll() {
+		List<AoCustomerInfo> AoCustomerInfos = (List<AoCustomerInfo>) custRepo.findAll();
+		return AoCustomerInfos;
 	}
 
-	public Customer getById(Long id) {
-		Optional<Customer> customers = custRepo.findById(id);
-		return customers.isPresent() ? customers.get() : null;
+	public AoCustomerInfo getById(Long id) {
+		Optional<AoCustomerInfo> AoCustomerInfos = custRepo.findById(id);
+		return AoCustomerInfos.isPresent() ? AoCustomerInfos.get() : null;
 	}
 
 	public void deleteById(Long id) {
 		custRepo.deleteById(id);
 	}
 
-	public void Add(Customer c) {
-		if(!custRepo.existsById(c.getId())){
+	public void Add(AoCustomerInfo c) {
+		if (!custRepo.existsById(c.getCifNo())) {
 			custRepo.save(c);
 		}
 	}
-	
-	public void Update(Customer c) {
-		 if(custRepo.existsById(c.getId())) {
+
+	public void Update(AoCustomerInfo c) {
+		if (custRepo.existsById(c.getCifNo())) {
 			custRepo.save(c);
-		 }
+		}
 	}
-	
-	/*
-	 * public List<Customer> getByName(String chars) { CustomerRepository2 custRepo
-	 * = new CustomerRepository2(); List<Customer> customers =
-	 * custRepo.searchByName(chars); return customers; }
-	 */
-	
-	 public List<Customer> getByName(String name) { 
-		 return custRepo.findByName(name);
-	 }
 
-
-
-
+	public List<AoCustomerInfo> getByName(String name) {
+		return custRepo.findByName(name);
+	}
 
 }
