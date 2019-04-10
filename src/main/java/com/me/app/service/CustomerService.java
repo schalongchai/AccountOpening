@@ -35,11 +35,21 @@ public class CustomerService {
 		}
 	}
 	
-	public List<Customer> getByName(String chars) {
-		CustomerRepository2 custRepo = new CustomerRepository2();
-		List<Customer> customers = custRepo.searchByName(chars);
-		return customers;
+	public void Update(Customer c) {
+		 if(custRepo.existsById(c.getId())) {
+			custRepo.save(c);
+		 }
 	}
+	
+	/*
+	 * public List<Customer> getByName(String chars) { CustomerRepository2 custRepo
+	 * = new CustomerRepository2(); List<Customer> customers =
+	 * custRepo.searchByName(chars); return customers; }
+	 */
+	
+	 public List<Customer> getByName(String name) { 
+		 return custRepo.findByName(name);
+	 }
 
 
 
