@@ -24,6 +24,9 @@ public class AoUser  {
 	private String lastname;
 
 	private String username;
+	
+	@Column(name="PASSWORD")
+	private String password;
 
 	//bi-directional many-to-one association to AoUsersRole
 	@OneToOne
@@ -72,6 +75,15 @@ public class AoUser  {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 	public AoUsersRole getAoUsersRole() {
 		return this.aoUsersRole;
