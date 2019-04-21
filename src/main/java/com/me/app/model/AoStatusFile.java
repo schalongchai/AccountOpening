@@ -1,26 +1,24 @@
 package com.me.app.model;
 
+import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
-
 
 /**
  * The persistent class for the AO_STATUS_FILE database table.
  * 
  */
 @Entity
-@Table(name="AO_STATUS_FILE")
-@NamedQuery(name="AoStatusFile.findAll", query="SELECT a FROM AoStatusFile a")
-public class AoStatusFile  {
+@Table(name = "AO_STATUS_FILE")
+@NamedQuery(name = "AoStatusFile.findAll", query = "SELECT a FROM AoStatusFile a")
+public class AoStatusFile implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String code;
 
-	@Column(name="STATUS_DESC")
+	@Column(name = "STATUS_DESC")
 	private String statusDesc;
-
-	//bi-directional many-to-one association to AoBulkFile
-	@OneToMany(mappedBy="aoStatusFile")
-	private List<AoBulkFile> aoBulkFiles;
 
 	public AoStatusFile() {
 	}
@@ -41,23 +39,14 @@ public class AoStatusFile  {
 		this.statusDesc = statusDesc;
 	}
 
-	public List<AoBulkFile> getAoBulkFiles() {
-		return this.aoBulkFiles;
-	}
-
-	public void setAoBulkFiles(List<AoBulkFile> aoBulkFiles) {
-		this.aoBulkFiles = aoBulkFiles;
-	}
-
 	public AoBulkFile addAoBulkFile(AoBulkFile aoBulkFile) {
-		getAoBulkFiles().add(aoBulkFile);
+
 		aoBulkFile.setAoStatusFile(this);
 
 		return aoBulkFile;
 	}
 
 	public AoBulkFile removeAoBulkFile(AoBulkFile aoBulkFile) {
-		getAoBulkFiles().remove(aoBulkFile);
 		aoBulkFile.setAoStatusFile(null);
 
 		return aoBulkFile;

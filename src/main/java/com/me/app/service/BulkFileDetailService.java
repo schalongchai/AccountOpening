@@ -29,13 +29,13 @@ public class BulkFileDetailService {
 	}
 
 	public void Add(AoBulkDetail c) {
-		if (!bulkRepo.existsById(c.getId().getIdFile())) {
+		if (!bulkRepo.existsById(c.getId())) {
 			bulkRepo.save(c);
 		}
 	}
 
 	public void Update(AoBulkDetail c) {
-		if (bulkRepo.existsById(c.getId().getIdFile())) {
+		if (bulkRepo.existsById(c.getId())) {
 			bulkRepo.save(c);
 		}
 	}

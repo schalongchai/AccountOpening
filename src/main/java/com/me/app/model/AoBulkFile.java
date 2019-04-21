@@ -1,5 +1,6 @@
 package com.me.app.model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,13 +13,29 @@ import java.util.Date;
 @Entity
 @Table(name="AO_BULK_FILES")
 @NamedQuery(name="AoBulkFile.findAll", query="SELECT a FROM AoBulkFile a")
-public class AoBulkFile  {
+public class AoBulkFile implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private AoBulkFilePK id;
+	@Id
+	@Column(name="ID_FILE")
+	private Long id;
 
+	
+	@Column(name="FILE_NAME")
+	private String fileName;
+	
+	
 	@Column(name="APPROVED_BY")
 	private String approvedBy;
+	
+	
+	public final String getFileName() {
+		return fileName;
+	}
+
+	public final void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="PROCESS_DATE")
@@ -42,19 +59,33 @@ public class AoBulkFile  {
 	@Column(name="UPLOAD_BY")
 	private String uploadBy;
 
-	//bi-directional many-to-one association to AoStatusFile
-	@ManyToOne
-	@JoinColumn(name="STATUS")
+	@OneToOne
+	@JoinColumn(name="CODE")
 	private AoStatusFile aoStatusFile;
+	
+	
+	@OneToOne
+	@JoinColumn(name = "ID_FILE")
+	private AoBulkDetail aoBulkDetail;
+	  
+	public final AoBulkDetail getAoBulkDetail() {
+		return aoBulkDetail;
+	}
+
+	public final void setAoBulkDetail(AoBulkDetail aoBulkDetail) {
+		this.aoBulkDetail = aoBulkDetail;
+	}
+	 
+	 
 
 	public AoBulkFile() {
 	}
 
-	public AoBulkFilePK getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(AoBulkFilePK id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

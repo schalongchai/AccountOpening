@@ -1,5 +1,6 @@
 package com.me.app.model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,10 +13,12 @@ import java.util.Date;
 @Entity
 @Table(name="AO_BULK_DETAIL")
 @NamedQuery(name="AoBulkDetail.findAll", query="SELECT a FROM AoBulkDetail a")
-public class AoBulkDetail  {
+public class AoBulkDetail implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private AoBulkDetailPK id;
+	@Id
+	@Column(name="ID_FILE")
+	private Long id;
 
 	@Column(name="AC_BRANCH")
 	private String acBranch;
@@ -45,6 +48,17 @@ public class AoBulkDetail  {
 
 	@Column(name="CIF_NO")
 	private BigDecimal cifNo;
+	
+	@Column(name="CITIZEN_ID")
+	private BigDecimal citizenID;
+	
+	public final BigDecimal getCitizenID() {
+		return citizenID;
+	}
+
+	public final void setCitizenID(BigDecimal citizenID) {
+		this.citizenID = citizenID;
+	}
 
 	@Column(name="CUSTOMER_TYPE")
 	private String customerType;
@@ -154,11 +168,11 @@ public class AoBulkDetail  {
 	public AoBulkDetail() {
 	}
 
-	public AoBulkDetailPK getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(AoBulkDetailPK id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

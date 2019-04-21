@@ -49,7 +49,7 @@ public class AoAccountInfo  {
 
 	@Column(name="PRODUCT_TYPE")
 	private String productType;
-
+	
 	public AoAccountInfo() {
 	}
 

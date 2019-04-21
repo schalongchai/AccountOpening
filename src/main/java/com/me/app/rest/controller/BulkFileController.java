@@ -2,7 +2,9 @@ package com.me.app.rest.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +29,7 @@ public class BulkFileController {
 	@RequestMapping(value = "/bulkfiles/{id}", method = RequestMethod.DELETE)
 	public void deleteByID(@PathVariable("id") Long id) {
 		bulkFileService.deleteById(id);
-		;
+		
 	}
 
 	@RequestMapping(value = "/bulkfiles/", method = RequestMethod.GET)
@@ -36,8 +38,14 @@ public class BulkFileController {
 	}
 
 	@RequestMapping(value = "/bulkfiles/{id}", method = RequestMethod.GET)
-	public AoBulkFile getByID(@PathVariable("id") Long id) {
-		return bulkFileService.getById(id);
+	public ResponseEntity<AoBulkFile> getByID(@PathVariable("id") Long id) {
+		
+		AoBulkFile c = bulkFileService.getById(id);
+		if(c!=null) {
+			return ResponseEntity.status(HttpStatus.OK).body(c);
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(c);
+		}
 	}
 
 
