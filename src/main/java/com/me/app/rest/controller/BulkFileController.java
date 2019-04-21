@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.me.app.model.AoBulkFile;
+import com.me.app.model.CustomResponse;
 import com.me.app.service.BulkFileService;
 
 @RestController
@@ -22,8 +23,13 @@ public class BulkFileController {
 	BulkFileService bulkFileService;
 
 	@RequestMapping(value = "/bulkfiles/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public void addAoBulkFile(@RequestBody AoBulkFile c) {
-		bulkFileService.Add(c);
+	public ResponseEntity<CustomResponse> addAoBulkFile(@RequestBody AoBulkFile c) {
+		CustomResponse cRes = bulkFileService.Add(c);
+		if(cRes.getError().equals("")) {
+			return ResponseEntity.status(HttpStatus.OK).build();
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(cRes);
+		}
 	}
 
 	@RequestMapping(value = "/bulkfiles/{id}", method = RequestMethod.DELETE)

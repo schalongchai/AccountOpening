@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.me.app.model.AoBulkFile;
+import com.me.app.model.CustomResponse;
 import com.me.app.repository.AoBulkFileDetailRepository;
 import com.me.app.repository.AoBulkFileRepository;
 
@@ -32,11 +33,19 @@ public class BulkFileService {
 		bulkRepo.deleteDetailByFileID(id);
 	}
 
-	public void Add(AoBulkFile c) {
+	public CustomResponse Add(AoBulkFile c) {
+		CustomResponse cRes = new CustomResponse();
 		if (!bulkRepo.existsById(c.getId())) {
 			bulkRepo.save(c);	
 			bulkDetailRepo.save(c.getAoBulkDetail());
+			cRes.setError("");
+			cRes.setMessage("");
+		}else {
+			cRes.setError("Can not add bulk file");
+			cRes.setMessage("Bulk file id " + c.getId().toString() + " already existed");
 		}
+		
+		return cRes;
 	}
 
 	public void Update(AoBulkFile c) {
