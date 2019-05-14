@@ -43,5 +43,9 @@ public class CustomerService {
 	public List<AoCustomerInfo> getByName(String name) {
 		return custRepo.findByName(name);
 	}
+	
+	public List<AoCustomerInfo> getBySearch(String cif,String fname,String lname,String citizen,String acctno) {
+		return custRepo.findBySearch(cif,fname,lname,citizen,acctno);
+	}
 
 }

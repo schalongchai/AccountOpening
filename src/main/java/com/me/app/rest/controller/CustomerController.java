@@ -48,9 +48,13 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/customers", method = RequestMethod.GET)
-	public ResponseEntity<List<AoCustomerInfo>> getBySearch(@RequestParam(value = "fname") String fname,
-			@RequestParam(value = "lname") String lname) {
-		List<AoCustomerInfo> c = customerService.getByName(fname);
+	public ResponseEntity<List<AoCustomerInfo>> getBySearch(
+			@RequestParam(value = "cif") String cif,
+			@RequestParam(value = "fname") String fname,
+			@RequestParam(value = "lname") String lname,
+			@RequestParam(value = "citizen") String citizen,
+			@RequestParam(value = "acctno") String acctno) {
+		List<AoCustomerInfo> c = customerService.getBySearch(cif, fname, lname, citizen, acctno);
 		if (c.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(c);
 		}
