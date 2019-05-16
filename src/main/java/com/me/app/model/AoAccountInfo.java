@@ -50,6 +50,17 @@ public class AoAccountInfo  {
 	@Column(name="PRODUCT_TYPE")
 	private String productType;
 	
+	@Column(name="BALANCE")
+	private BigDecimal balance;
+	
+	public final BigDecimal getBalance() {
+		return balance;
+	}
+
+	public final void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
 	public AoAccountInfo() {
 	}
 
