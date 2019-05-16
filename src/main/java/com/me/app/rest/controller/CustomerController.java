@@ -53,7 +53,7 @@ public class CustomerController {
 			@RequestParam(value = "fname") String fname,
 			@RequestParam(value = "lname") String lname,
 			@RequestParam(value = "citizen") String citizen,
-			@RequestParam(value = "acctno") String acctno) {
+			@RequestParam(required = false) String acctno) {
 		List<AoCustomerInfo> c = customerService.getBySearch(cif, fname, lname, citizen, acctno);
 		if (c.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(c);
