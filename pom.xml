@@ -121,6 +121,6 @@
 		
 	</build>
 
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<description>Account Opening project with Spring boot</description>
 </project>
