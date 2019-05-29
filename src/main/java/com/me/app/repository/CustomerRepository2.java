@@ -8,19 +8,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import org.springframework.beans.factory.annotation.Value;
 
 import com.me.app.model.Customer;
 //This just a sample when doing every thing by your self, Not used any more...
 //
 public class CustomerRepository2{
-	// JDBC driver name and database URL
-	   	static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";  
-	   	static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
+		// JDBC driver name and database URL
+		@Value("${spring.datasource.driver-class-name}")
+	   	private String JDBC_DRIVER;
+		
+	   	@Value("${spring.datasource.url}")
+	   	private String DB_URL;
 	
 	   	//  Database credentials
-	   	static final String USER = "SYSTEM";
-	   	static final String PASS = "123456";
+		@Value("${spring.datasource.username}")
+	   	private String DB_USER;
+
+		@Value("${spring.datasource.password}")
+	   	private String DB_PASS;
    
 		public List<Customer> searchByName(String name) {
 			List<Customer> listCust = new ArrayList<Customer>();
@@ -29,8 +35,8 @@ public class CustomerRepository2{
 			Statement stmt = null;
 			try {
 	
-	            Class.forName("oracle.jdbc.driver.OracleDriver");
-	            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+	            Class.forName(JDBC_DRIVER);
+	            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 	            stmt = conn.createStatement();
 	            name = name.toLowerCase();
 	            String sql = "SELECT * from customer where LOWER(name) like '%"+name+"%'";
