@@ -17,12 +17,12 @@ public interface AoBulkFileRepository extends CrudRepository<AoBulkFile, Long>{
 	@Modifying
 	@Transactional
 	@Query(value = "DELETE FROM AO_BULK_FILES where ID_FILE = ?1" , nativeQuery = true)
-	public void deleteByFileID(Long fileid);
+	public void deleteByFileID(String fileid);
 	
 	@Modifying
 	@Transactional
 	@Query(value = "DELETE FROM AO_BULK_DETAIL where ID_FILE = ?1" , nativeQuery = true)
-	public void deleteDetailByFileID(Long fileid);
+	public void deleteDetailByFileID(String fileid);
 
 
 }

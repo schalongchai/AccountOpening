@@ -28,7 +28,7 @@ public class BulkFileService {
 	}
 	
 
-	public void deleteById(Long id) {
+	public void deleteById(String id) {
 		bulkRepo.deleteByFileID(id);
 		bulkRepo.deleteDetailByFileID(id);
 	}

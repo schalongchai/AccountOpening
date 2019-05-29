@@ -33,7 +33,7 @@ public class BulkFileController {
 	}
 
 	@RequestMapping(value = "/bulkfiles/{id}", method = RequestMethod.DELETE)
-	public void deleteByID(@PathVariable("id") Long id) {
+	public void deleteByID(@PathVariable("id") String id) {
 		bulkFileService.deleteById(id);
 		
 	}
