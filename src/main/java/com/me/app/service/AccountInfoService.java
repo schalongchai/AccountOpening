@@ -1,5 +1,6 @@
 package com.me.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,23 @@ public class AccountInfoService {
 	public List<AoAccountInfo> getByCif(Long cif) {
 		List<AoAccountInfo> AoAccountInfos = accountRepo.findByCifNo(cif);
 		return AoAccountInfos;
+	}
+	
+	public List<AoAccountInfo> getByDateBranch(String start, String end, String branch ) {
+		 
+		List<AoAccountInfo> aoAccountInfos = new ArrayList<AoAccountInfo>();
+	
+		//Convert to yyyy-mm-dd
+	    String s = start.substring(6,10)+"-"+start.substring(3,5)+"-"+start.substring(0,2);
+	    String e = end.substring(6,10)+"-"+end.substring(3,5)+"-"+end.substring(0,2);
+	    
+        if(!branch.equals("all")) {
+        	aoAccountInfos = accountRepo.findByDateBranch(s, e, branch);
+        }else {
+        	aoAccountInfos = accountRepo.findByDate(s, e);
+        }
+		
+		return aoAccountInfos;
 	}
 	
 	public AoAccountInfo getByCifAndAccountNo(Long cif,Long AcctNo) {
