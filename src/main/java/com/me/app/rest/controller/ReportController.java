@@ -29,8 +29,7 @@ public class ReportController {
 		List<AoAccountInfo> accountsList = (List<AoAccountInfo>) accountService.getByDateBranch(s, e, b);
 		
 		ByteArrayInputStream in = ExcelCreator.AccountsToExcel(accountsList);
-		// return IOUtils.toByteArray(in);
-		
+			
 		HttpHeaders headers = new HttpHeaders();
 		    headers.add("Content-Disposition", "attachment; filename=accounts.xlsx");
 		    headers.add("Content-Type", "application/vnd.ms-excel; charset=utf-8");
