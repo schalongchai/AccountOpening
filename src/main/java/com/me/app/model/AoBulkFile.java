@@ -63,20 +63,6 @@ public class AoBulkFile implements Serializable {
 	@JoinColumn(name="CODE")
 	private AoStatusFile aoStatusFile;
 	
-	
-	@OneToOne
-	@JoinColumn(name = "ID_FILE")
-	private AoBulkDetail aoBulkDetail;
-	  
-	public final AoBulkDetail getAoBulkDetail() {
-		return aoBulkDetail;
-	}
-
-	public final void setAoBulkDetail(AoBulkDetail aoBulkDetail) {
-		this.aoBulkDetail = aoBulkDetail;
-	}
-	 
-	 
 
 	public AoBulkFile() {
 	}

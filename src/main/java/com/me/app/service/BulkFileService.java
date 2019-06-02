@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.me.app.model.AoBulkFile;
 import com.me.app.model.CustomResponse;
-import com.me.app.repository.AoBulkFileDetailRepository;
 import com.me.app.repository.AoBulkFileRepository;
 
 
@@ -13,9 +12,6 @@ import com.me.app.repository.AoBulkFileRepository;
 public class BulkFileService {
 	@Autowired
 	private AoBulkFileRepository bulkRepo;
-	
-	@Autowired
-	private AoBulkFileDetailRepository bulkDetailRepo;
 
 	public List<AoBulkFile> getAll() {
 		List<AoBulkFile> AoBulkFiles = (List<AoBulkFile>) bulkRepo.findAll();
@@ -37,7 +33,6 @@ public class BulkFileService {
 		CustomResponse cRes = new CustomResponse();
 		if (!bulkRepo.existsById(c.getId())) {
 			bulkRepo.save(c);	
-			bulkDetailRepo.save(c.getAoBulkDetail());
 			cRes.setError("");
 			cRes.setMessage("");
 		}else {
@@ -49,9 +44,9 @@ public class BulkFileService {
 	}
 
 	public void Update(AoBulkFile c) {
-		if (bulkRepo.existsById(c.getId())) {
+		
+		if (bulkRepo.existsById(c.getId())){
 			bulkRepo.save(c);
-			bulkDetailRepo.save(c.getAoBulkDetail());
 		}
 	}
 

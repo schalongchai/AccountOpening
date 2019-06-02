@@ -2,56 +2,207 @@ package com.me.app.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.util.Date;
-
 
 /**
  * The persistent class for the AO_BULK_DETAIL database table.
  * 
  */
 @Entity
-@Table(name="AO_BULK_DETAIL")
-@NamedQuery(name="AoBulkDetail.findAll", query="SELECT a FROM AoBulkDetail a")
+@Table(name = "AO_BULK_DETAIL")
 public class AoBulkDetail implements Serializable {
-	private static final long serialVersionUID = 1L;
 
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "ID_FILE", nullable = false, insertable = false, updatable = false)
+	private AoBulkFile aoBulkFile;
+	
 	@Id
-	@Column(name="ID_FILE")
-	private Long id;
+	@Column(name = "ID_DETAIL")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id_detail;
 
-	@Column(name="AC_BRANCH")
+	@Column(name = "ID_FILE")
+	private Long id_file;
+
+	@Column(name = "SEQ")
+	private Long seq;
+
+	@Column(name = "AC_BRANCH")
 	private String acBranch;
 
-	@Column(name="AC_NO")
+	@Column(name = "AC_NO")
 	private BigDecimal acNo;
 
-	@Column(name="AC_OPEN_TYPE")
+	@Column(name = "AC_OPEN_TYPE")
 	private String acOpenType;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="AC_OPENDATE")
+	@Column(name = "AC_OPENDATE")
 	private Date acOpendate;
 
-	@Column(name="AC_PRODUCT_TYPE")
+	@Column(name = "AC_PRODUCT_TYPE")
 	private String acProductType;
 
-	@Column(name="AC_STATUS")
+	@Column(name = "AC_STATUS")
 	private String acStatus;
 
-	@Column(name="AMOUNT_INCOME")
+	@Column(name = "AMOUNT_INCOME")
 	private BigDecimal amountIncome;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="BIRTH_DATE")
+	@Column(name = "BIRTH_DATE")
 	private Date birthDate;
 
-	@Column(name="CIF_NO")
+	@Column(name = "CIF_NO")
 	private BigDecimal cifNo;
-	
-	@Column(name="CITIZEN_ID")
+
+	@Column(name = "CITIZEN_ID")
 	private BigDecimal citizenID;
-	
+
+	@Column(name = "CUSTOMER_TYPE")
+	private String customerType;
+
+	@Column(name = "DOCUMENT_TYPE")
+	private String documentType;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "EXPIRE_DATE")
+	private Date expireDate;
+
+	@Column(name = "FIRST_NAME_EN")
+	private String firstNameEn;
+
+	@Column(name = "FIRST_NAME_TH")
+	private String firstNameTh;
+
+	@Column(name = "HOME_EXT")
+	private String homeExt;
+
+	@Column(name = "HOME_NUMBER")
+	private String homeNumber;
+
+	@Column(name = "INV_VAL_FIELD")
+	private String invValField;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "ISSUE_DATE")
+	private Date issueDate;
+
+	@Column(name = "LAST_NAME_EN")
+	private String lastNameEn;
+
+	@Column(name = "LAST_NAME_TH")
+	private String lastNameTh;
+
+	@Column(name = "MIDLE_NAME_EN")
+	private String midleNameEn;
+
+	@Column(name = "MIDLE_NAME_TH")
+	private String midleNameTh;
+
+	@Column(name = "MISSING_FIELD")
+	private String missingField;
+
+	@Column(name = "MOBILE_NUMBER")
+	private String mobileNumber;
+
+	@Column(name = "NATIONALITY")
+	private String nationality;
+
+	@Column(name = "OCCUPATION")
+	private String occupation;
+
+	@Column(name = "OFF_EXT")
+	private String offExt;
+
+	@Column(name = "OFF_NUMBER")
+	private String offNumber;
+
+	@Column(name = "PREFIX_EN")
+	private String prefixEn;
+
+	@Column(name = "PREFIX_TH")
+	private String prefixTh;
+
+	@Column(name = "REQ_FIELD_PASSED")
+	private String reqFieldPassed;
+
+	@Column(name = "SOURCE_INCOME")
+	private String sourceIncome;
+
+	@Column(name = "VAL_FIELD_PASSED")
+	private String valFieldPassed;
+
+	@Column(name = "WK_ADDR_COUNTRY")
+	private String wkAddrCountry;
+
+	@Column(name = "WK_ADDR_DISCTICT")
+	private String wkAddrDisctict;
+
+	@Column(name = "WK_ADDR_MOO")
+	private String wkAddrMoo;
+
+	@Column(name = "WK_ADDR_NO")
+	private String wkAddrNo;
+
+	@Column(name = "WK_ADDR_POSTCODE")
+	private BigDecimal wkAddrPostcode;
+
+	@Column(name = "WK_ADDR_PROVINCE")
+	private String wkAddrProvince;
+
+	@Column(name = "WK_ADDR_ROAD")
+	private String wkAddrRoad;
+
+	@Column(name = "WK_ADDR_SOI")
+	private String wkAddrSoi;
+
+	@Column(name = "WK_ADDR_SUBDISCT")
+	private String wkAddrSubdisct;
+
+	@Column(name = "WK_COMP_NAME")
+	private String wkCompName;
+
+	@Column(name = "WK_POSITION")
+	private String wkPosition;
+
+	public final AoBulkFile getAoBulkFile() {
+		return aoBulkFile;
+	}
+
+	public final void setAoBulkFile(AoBulkFile aoBulkFile) {
+		this.aoBulkFile = aoBulkFile;
+	}
+
+	private static final long serialVersionUID = 1L;
+
+	public Long getId_detail() {
+		return id_detail;
+	}
+
+	public void setId_detail(Long id_detail) {
+		this.id_detail = id_detail;
+	}
+
+	public Long getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Long seq) {
+		this.seq = seq;
+	}
+
+	public final Long getId_file() {
+		return id_file;
+	}
+
+	public final void setId_file(Long id_file) {
+		this.id_file = id_file;
+	}
+
 	public final BigDecimal getCitizenID() {
 		return citizenID;
 	}
@@ -60,121 +211,9 @@ public class AoBulkDetail implements Serializable {
 		this.citizenID = citizenID;
 	}
 
-	@Column(name="CUSTOMER_TYPE")
-	private String customerType;
-
-	@Column(name="DOCUMENT_TYPE")
-	private String documentType;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="EXPIRE_DATE")
-	private Date expireDate;
-
-	@Column(name="FIRST_NAME_EN")
-	private String firstNameEn;
-
-	@Column(name="FIRST_NAME_TH")
-	private String firstNameTh;
-
-	@Column(name="HOME_EXT")
-	private String homeExt;
-
-	@Column(name="HOME_NUMBER")
-	private String homeNumber;
-
-	@Column(name="INV_VAL_FIELD")
-	private String invValField;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="ISSUE_DATE")
-	private Date issueDate;
-
-	@Column(name="LAST_NAME_EN")
-	private String lastNameEn;
-
-	@Column(name="LAST_NAME_TH")
-	private String lastNameTh;
-
-	@Column(name="MIDLE_NAME_EN")
-	private String midleNameEn;
-
-	@Column(name="MIDLE_NAME_TH")
-	private String midleNameTh;
-
-	@Column(name="MISSING_FIELD")
-	private String missingField;
-
-	@Column(name="MOBILE_NUMBER")
-	private String mobileNumber;
-
-	private String nationality;
-
-	private String occupation;
-
-	@Column(name="OFF_EXT")
-	private String offExt;
-
-	@Column(name="OFF_NUMBER")
-	private String offNumber;
-
-	@Column(name="PREFIX_EN")
-	private String prefixEn;
-
-	@Column(name="PREFIX_TH")
-	private String prefixTh;
-
-	@Column(name="REQ_FIELD_PASSED")
-	private String reqFieldPassed;
-
-	@Column(name="SOURCE_INCOME")
-	private String sourceIncome;
-
-	@Column(name="VAL_FIELD_PASSED")
-	private String valFieldPassed;
-
-	@Column(name="WK_ADDR_COUNTRY")
-	private String wkAddrCountry;
-
-	@Column(name="WK_ADDR_DISCTICT")
-	private String wkAddrDisctict;
-
-	@Column(name="WK_ADDR_MOO")
-	private String wkAddrMoo;
-
-	@Column(name="WK_ADDR_NO")
-	private String wkAddrNo;
-
-	@Column(name="WK_ADDR_POSTCODE")
-	private BigDecimal wkAddrPostcode;
-
-	@Column(name="WK_ADDR_PROVINCE")
-	private String wkAddrProvince;
-
-	@Column(name="WK_ADDR_ROAD")
-	private String wkAddrRoad;
-
-	@Column(name="WK_ADDR_SOI")
-	private String wkAddrSoi;
-
-	@Column(name="WK_ADDR_SUBDISCT")
-	private String wkAddrSubdisct;
-
-	@Column(name="WK_COMP_NAME")
-	private String wkCompName;
-
-	@Column(name="WK_POSITION")
-	private String wkPosition;
-
 	public AoBulkDetail() {
 	}
 
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getAcBranch() {
 		return this.acBranch;
