@@ -58,6 +58,18 @@ public class AoBulkFile implements Serializable {
 
 	@Column(name="UPLOAD_BY")
 	private String uploadBy;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="UPLOAD_DATE")
+	private Date uploadDate;
+
+	public Date getUploadDate() {
+		return uploadDate;
+	}
+
+	public void setUploadDate(Date uploadDate) {
+		this.uploadDate = uploadDate;
+	}
 
 	@OneToOne
 	@JoinColumn(name="CODE")
